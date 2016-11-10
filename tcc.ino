@@ -17,8 +17,8 @@
 #define pino_echo 13
 
 // Define a rede
-const char* ssid = "Ramon";
-const char* password = "123456789";
+const char* ssid = "xota";
+const char* password = "banana01";
 
 // Web Server na porta 80
 WiFiServer server(80);
@@ -116,13 +116,13 @@ void loop() {
 
         String request = String("{\"beaconId\":") + String(1) + String(",\"temperature\":") + String(t) + String(",\"humidity\":") + String(h) + String(",\"distance\":") + String(cmMsec) + String("}");
         HTTPClient http;
-        http.begin("http://192.168.43.78:8080/beacon/history");
+        http.begin("http://52.67.179.27:8080/beacon/history");
         http.addHeader("Content-Type", "application/json"); 
         http.POST(request);
         http.writeToStream(&Serial);
         http.end();
       }
-      delay(10000);
+      delay(30000);
     }  
 
     Serial.println("Client disconnected.");
