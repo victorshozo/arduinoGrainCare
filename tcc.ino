@@ -8,7 +8,7 @@
 #include <Arduino.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
+  #include <stdarg.h>
 #include <string.h>
 
 //Define os pinos para o trigger e echo e sensor
@@ -17,8 +17,8 @@
 #define pino_echo 13
 
 // Define a rede
-const char* ssid = "xota";
-const char* password = "banana01";
+const char* ssid = "delta01";
+const char* password = "21543105";
 
 // Web Server na porta 80
 WiFiServer server(80);
@@ -106,17 +106,10 @@ void loop() {
           Serial.println(inMsec);
         }
 
-        // StaticJsonBuffer<200> jsonBuffer;
-        // JsonObject& root = jsonBuffer.createObject();
-        // root["beaconId"] = 1;
-        // root["humidity"] = h;
-        // root["temperature"] = t;
-        // root["distance"] = cmMsec;
-        // root.printTo(client);
-
-        String request = String("{\"beaconId\":") + String(1) + String(",\"temperature\":") + String(t) + String(",\"humidity\":") + String(h) + String(",\"distance\":") + String(cmMsec) + String("}");
+        //String request = String("{\"sensorId\":") + String(1) + String(",\"distance\":") + String(cmMsec) + String("}");
+        String request = String("{\"sensorId\":") + String(2) + String(",\"temperature\":") + String(t) + String(",\"humidity\":") + String(h) + String("}");
         HTTPClient http;
-        http.begin("http://52.67.179.27:8080/beacon/history");
+        http.begin("http://52.67.179.27:8080/sensor/history");
         http.addHeader("Content-Type", "application/json"); 
         http.POST(request);
         http.writeToStream(&Serial);
